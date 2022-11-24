@@ -1,0 +1,5 @@
+---
+HomePage:
+   logo: "//*[@id= 'nav-logo-sprites']"
+   signInLink: "//*[text()='Hello, sign in']"
+   

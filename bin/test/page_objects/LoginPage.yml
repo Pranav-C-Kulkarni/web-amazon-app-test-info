@@ -1,0 +1,7 @@
+---
+LoginPage:
+   EmailTextBox: "//input[@id='ap_email']"
+   PasswordTextBox: "//input[@id='ap_password']"
+   ContinueBtn: "//*[@id='continue']"
+   SignInBtn: "//*[@id='signInSubmit']"
+     
