@@ -10,12 +10,28 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Then;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Assert;
 
 public class ProjectStepDefinations {
     WebDriver driver;
+	FileInputStream fsrc;
+	XSSFWorkbook wb;
+	XSSFSheet sh;
+	
+	public ProjectStepDefinations(){
+		
+	}
+	
+	public ProjectStepDefinations(WebDriver driver){
+		this.driver = driver;
+	}
 
-    @Before
+	@Before
     public void launchBrowser() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\pranav.b.kulkarni\\Selenium\\chromedriver.exe");
         driver = new ChromeDriver();
@@ -70,6 +86,17 @@ public class ProjectStepDefinations {
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
+    }
+    
+    @Then("^we need \"(.*?)\" test cases from \"(.*?)\" sheet to the (.*) element$")
+    public void processxlsxsheet(int number, String fileName, String element) throws IOException {
+    	fsrc= new FileInputStream("src\\test\\resources\\test_data\\"+ fileName +".xlsx");
+    	wb= new XSSFWorkbook(fsrc);
+    	sh= wb.getSheetAt(0);
+    	String dr2c1=sh.getRow(1).getCell(0).getStringCellValue();
+    	System.err.println(dr2c1 + " Pranav");
+    	ProjectStepDefinations obj = new ProjectStepDefinations(driver);
+    	obj.inputText(dr2c1, element);
     }
 
     @After
